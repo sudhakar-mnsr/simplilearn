@@ -13,7 +13,7 @@ var (
 )
 
 func main() {
-   if err := webCall(); err != nil {
+   if err := webCall(true); err != nil {
       switch err {
       case ErrBadRequest:
          fmt.Println("Bad Request error occurred")
@@ -27,4 +27,11 @@ func main() {
       }
    }
    fmt.Println("Life good")
+}
+
+func webCall(b bool) error {
+   if b {
+      return ErrBadRequest
+   }
+   return ErrPageMoved
 }
