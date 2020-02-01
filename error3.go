@@ -9,13 +9,13 @@ import (
 
 // An UnmarshallTypeError describes a JSON value that was
 // not appropriate for a value of a specific Go type.
-type UnmarshallTypeError struct {
+type UnmarshalTypeError struct {
    Value string // description of JSON value
    Type reflect.Type // type of Go value it could not be assigned to
 }
 
-func (e *UnmarshallTypeError) Error() string {
-   return "json: cannot unmarshal " e.Value + "into value of type " + e.Type.String()
+func (e *UnmarshalTypeError) Error() string {
+   return "json: cannot unmarshal " + e.Value + "into value of type " + e.Type.String()
 }
 
 // An InvalidUnmarshallError describes and invalid argument passed to Unmarshal
@@ -55,4 +55,14 @@ func main() {
       return
    }
    fmt.Println("Name:", u.Name)
+}
+
+// Unmarshal simulates an unmarshal call that always fails.
+func Unmarshal(data []byte, v interface{}) error {
+	rv := reflect.ValueOf(v)
+	if rv.Kind() != reflect.Ptr || rv.IsNil() {
+		return &InvalidUnmarshalError{reflect.TypeOf(v)}
+	}
+
+	return &UnmarshalTypeError{"string", reflect.TypeOf(v)}
 }
