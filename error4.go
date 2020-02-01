@@ -55,3 +55,8 @@ func (c *client) TypeAsContext() {
 }
 
 
+// temporary is declared to test the existence of the method coming 
+// from the net package
+type temporary interface {
+   Temporary() bool
+}
