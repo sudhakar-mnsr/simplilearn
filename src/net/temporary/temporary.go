@@ -20,10 +20,10 @@ type temporary interface {
 	Temporary() bool
 }
 
-func (e *OpError) Temporary() bool {
+func (e *AppError) Temporary() bool {
 	// Treat ECONNRESET and ECONNABORTED as temporary errors when
 	// they come from calling accept. See issue 6163.
-	if e.Op == "accept" && isConnError(e.Err) {
+	if e.App == "accept" && isConnError(e.Err) {
 		return true
 	}
 
