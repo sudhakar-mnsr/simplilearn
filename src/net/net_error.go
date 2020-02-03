@@ -10,3 +10,10 @@ import (
 type temporary interface {
 	Temporary() bool
 }
+
+func main() {
+   var c *client
+   line, err := c.reader.ReadString('\n')
+   e := err.(type)
+   e.Temporary()
+}
