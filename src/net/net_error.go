@@ -5,6 +5,12 @@ import (
    "net/temporary"
 )
 
+// client represents a single connection in the room.
+type client struct {
+	name   string
+	reader *bufio.Reader
+}
+
 // temporary is declared to test for the existence of the method coming
 // from the net package.
 type temporary interface {
