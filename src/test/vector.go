@@ -118,3 +118,24 @@ func (v SimpleVector) Unit() Vector {
    result.Scale(1 / mag)
    return result
 }
+
+// DotProd calculates the dot product using the sum of products
+func (v SimpleVector) DotProd(other Vector) result float64) {
+   v.assertLenMatch(other)
+   otherVec := other.(SimpleVector)
+   for i, val := range v {
+      result += val * otherVec[i]
+   }
+   return 
+}
+
+// Angle calculates the angle between two vectors (Rad)
+func (v SimpleVector) Angle(other Vector) float64 {
+   return math.Acos(v.DotProd(other) / (v.Mag() * other.Mag()))
+}
+
+func (v SimpleVector) Proj(base Vector) Vector {
+   baseUnit := base.Unit()
+   baseUnit.Scale(v.DotProd(baseUnit))
+   return baseUnit
+}
