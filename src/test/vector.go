@@ -67,3 +67,21 @@ func (v SimpleVector) Eq2(other Vector) bool {
    }
    return true
 }
+
+// Test for the zero vector
+func (v SimpleVector) IsZero) bool {
+   return v.Mag() <= zero
+}
+
+// Add returns the sum of two vectors
+func (v SimpleVector) Add(other Vector) Vector {
+   v.assertLenMatch(other)
+   otherVec := other.(SimpleVector)
+   result := make([]float64, len(v))
+   for i, val := range v {
+      result[i] = val + otherVec[i]
+   }
+   return SimpleVector(result)
+}
+
+
