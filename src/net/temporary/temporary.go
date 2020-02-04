@@ -1,5 +1,5 @@
 // Sample program to show how wrapping errors work.
-package main
+package temporary
 
 import (
 	"fmt"
