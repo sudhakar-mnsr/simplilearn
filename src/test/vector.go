@@ -84,4 +84,28 @@ func (v SimpleVector) Add(other Vector) Vector {
    return SimpleVector(result)
 }
 
+// Sub returns the subtraction of a vector from another
+func (v SimpleVector) Sub(other Vector) Vector {
+   v.assertLenMatch(other)
+   otherVec := other.(SimpleVector)
+   result := make([]float64, len(v))
+   for i, val := range v {
+      result[i] = val - otherVec[i]
+   }
+   return SimpleVector(result)
+}
 
+// Scale scales the vector
+func (v SimpleVector) Scale(scale float64) {
+   for i := range v {
+      v[i] = v[i] * scale
+   }
+}
+
+// Mag computes the magnitude of the vector
+func (v SimpleVector) Mag() (result float64) {
+   for _, v := range v {
+      result += (v * v)
+   }
+   return math.Sqrt(result)
+}
