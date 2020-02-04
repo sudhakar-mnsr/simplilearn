@@ -65,7 +65,7 @@ func TestVectorSub(t *testing.T) {
 		v1[1]-v2[1],
 	)
 	if !v3.Eq(expect) {
-		t.Log("Subtraction failed, expecting %s, got %s", expect, v3)
+		t.Logf("Subtraction failed, expecting %s, got %s", expect, v3)
 		t.Fail()
 	}
 	t.Log(v1, "-", v2, "=", v3)
@@ -100,7 +100,7 @@ func TestVectorMag(t *testing.T) {
 	for _, c := range cases {
 		mag := c.vec.Mag()
 		if mag != c.expected {
-			t.Errorf("Magnitude failed, execpted %d, got %d", c.expected, mag)
+			t.Errorf("Magnitude failed, execpted %f, got %f", c.expected, mag)
 		}
 	}
 }
@@ -137,7 +137,7 @@ func TestVectorAngle(t *testing.T) {
 	actual := v1.Angle(v2)
 	expect := math.Acos(v1.DotProd(v2) / (v1.Mag() * v2.Mag()))
 	if actual != expect {
-		t.Logf("Vector angle failed, expecting %d, got %d", expect, actual)
+		t.Logf("Vector angle failed, expecting %f, got %f", expect, actual)
 		t.Fail()
 	}
 	t.Log("Angle between", v1, "and", v2, "=", actual)
