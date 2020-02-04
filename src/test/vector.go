@@ -109,3 +109,12 @@ func (v SimpleVector) Mag() (result float64) {
    }
    return math.Sqrt(result)
 }
+
+// Unit returns the normalization of the vector
+func (v SimpleVector) Unit() Vector {
+   var result SimpleVector = make([]float64, len(v))
+   copy(result, v)
+   mag := result.Mag()
+   result.Scale(1 / mag)
+   return result
+}
