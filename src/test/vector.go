@@ -47,3 +47,23 @@ func (v SimpleVector) String() string {
    return buff.String()
 }
 
+// Eq compares vector magnitude and directions
+func (v SimpleVector) Eq(other Vector) bool {
+   ang := v.Angle(other)
+   if math.IsNaN(ang) {
+      return v.Mag() == other.Mag()
+   }
+   return v.Mag() == other.Mag() && ang <= zero
+}
+
+// Eq compares each vector components for equality
+func (v SimpleVector) Eq2(other Vector) bool {
+   v.assertLenMatch(other)
+   otherVec := other.(SimpleVector)
+   for i, val := range v {
+      if val != otherVec[i] {
+         return false
+      }
+   }
+   return true
+}
