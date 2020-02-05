@@ -63,3 +63,13 @@ func BenchmarkVectorUnit(b *testing.B) {
       v1.Unit()
    }
 }
+
+func BenchmarkVectorDotProd(b *testing.B) {
+   r := rand.New(rand.NewSource(time.Now().UnixNano()))
+   for i := 0; i < b.N; i++ {
+      v1 := New(r.Float64(), r.Float64())
+      v2 := New(r.Float64(), r.Float64())
+      v1.DotProd(v2)
+   }
+}
+
