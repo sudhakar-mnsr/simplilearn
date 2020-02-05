@@ -47,3 +47,19 @@ func BenchmarkVectorScale(b *testing.B) {
       v1.Scale(r.Float64())
    }
 }
+
+func BenchmarkVectorMag(b *testing.B) {
+   r := rand.New(rand.NewSource(time.Now().UnixNano()))
+   for i := 0; i < b.N; i++ {
+      v1 := New(r.Float64(), r.Float64())
+      v1.Mag()
+   }
+}
+
+func BenchmarkVectorUnit(b *testing.B) {
+   r := rand.New(rand.NewSource(time.Now().UnixNano()))
+   for i := 0; i < b.N; i++ {
+      v1 := New(r.Float64(), r.Float64())
+      v1.Unit()
+   }
+}
