@@ -21,3 +21,29 @@ func BenchmarkVectorEqual2(b *testing.B) {
       v1.Eq2(v1)
    }
 }
+
+func BenchmarkVectorAdd(b *testing.B) {
+   r := rand.New(rand.NewSource(time.Now().UnixNano()))
+   for i := 0; i < b.N; i++ {
+      v1 := New(r.Float64(), r.Float64())
+      v2 := New(r.Float64(), r.Float64())
+      v1.Add(v2)
+   }
+}
+
+func BenchmarkVectorSub(b *testing.B) {
+   r := rand.New(rand.NewSource(time.Now().UnixNano()))
+   for i := 0; i < b.N; i++ {
+      v1 := New(r.Float64(), r.Float64())
+      v2 := New(r.Float64(), r.Float64())
+      v1.Sub(v2)
+   }
+}
+
+func BenchmarkVectorScale(b *testing.B) {
+   r := rand.New(rand.NewSource(time.Now().UnixNano()))
+   for i := 0; i < b.N; i++ {
+      v1 := New(r.Float64(), r.Float64())
+      v1.Scale(r.Float64())
+   }
+}
