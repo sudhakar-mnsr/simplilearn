@@ -73,3 +73,11 @@ func BenchmarkVectorDotProd(b *testing.B) {
    }
 }
 
+func BenchmarkVectorAngle(b *testing.B) {
+   r := rand.New(rand.NewSource(time.Now().UnixNano()))
+   for i := 0; i < b.N; i++ {
+      v1 := New(r.Float64(), r.Float64())
+      v2 := New(r.Float64(), r.Float64())
+      v1.Angle(v2)
+   }
+}
