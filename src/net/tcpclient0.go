@@ -14,7 +14,7 @@ const prompt = "curr"
 const buffLen = 1024
 
 func main() {
-   conn, err := net.Dail("tcp", addr)
+   conn, err := net.Dial("tcp", addr)
    if err != nil {
       fmt.Println(err)
       return 
