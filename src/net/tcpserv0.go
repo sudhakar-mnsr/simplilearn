@@ -34,3 +34,44 @@ func main() {
       go handleConnection(conn)
    }
 }
+
+// handle client connection
+func handleConnection(conn net.Conn) {
+   defer conn.Close()
+   // loop to stay connected with client
+   for {
+      cmdLine := make([]byte, (1024 * 4))
+      n, err := conn.Read(cmdLine)
+      if n == 0 || err != nil {
+         return
+      }
+      cmd, param := parseCommand(string(cmdLine[0:n]))
+      if cmd == "" {
+         continue
+      }
+   
+      // execute command
+      switch strings.ToUpper(cmd) {
+      case "GET":
+         result := curr.Find(currencies, param)
+         if len(result) == 0 {
+            conn.Write([]byte("Nothing found\n"))
+            continue
+         }
+         // stream result to client
+         for _, cur := range result {
+            _, err := fmt.Fprintf(conn, "%s %s %s %s\n", cur.Name, cur.Code, cur.Number, cur.Country,)
+            if err != nil {
+               return
+            }
+            // reset deadline while writing,
+            // causes server to close conn if client is gone
+            conn.SetWriteDeadline(time.Now().Add(time.Second * 5))
+         }
+         // reset read deadline for the next read
+         conn.SetWriteDeadline(time.Time{})
+      default:
+         conn.Write([]byte("Invalid command\n"))
+      }
+   }
+} 
