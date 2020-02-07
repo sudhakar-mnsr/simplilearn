@@ -34,3 +34,24 @@ func currs(resp http.ResponseWriter, req *http.Request) {
       return
    }
 }
+
+// serves HTML gui
+func gui(resp http.ResponseWriter, req *http.Request) {
+   file, err := os.Open("./currency.html")
+   if err != nil {
+      resp.WriteHeader(http.StatusInternalServerError)
+      fmt.Println(err)
+      return
+   }
+   io.Copy(resp, file)
+}
+
+func main() {
+   mux := http.NewServeMux()
+   mux.HandleFunc("/", gui)
+   mux.HandleFunc("/currency", currs)
+
+   if err := http.ListenAndServe(":4040", mux); err != nil {
+      fmt.Println(err)
+   }
+}
