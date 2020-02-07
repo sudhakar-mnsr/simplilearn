@@ -29,7 +29,7 @@ func Load(path string) []Currency {
 
    reader := csv.NewReader(file)
    for {
-      row, err := reaer.Read()
+      row, err := reader.Read()
       if err == io.EOF {
          break
       }
@@ -39,7 +39,7 @@ func Load(path string) []Currency {
       c := Currency{
          Country: row[0],
          Name:    row[1],
-         Code:    row[2]
+         Code:    row[2],
          Number:  row[3],
       }
       table = append(table, c)
@@ -54,9 +54,9 @@ func Find(table []Currency, filter string) []Currency {
    result := make([]Currency, 0)
    filter = strings.ToUpper(filter)
    for _, cur := range table {
-      if cur.Code = filter ||
+      if cur.Code == filter ||
          cur.Number == filter ||
-         strings.Contains(strings.ToUpper(cur.Countr), filter) ||
+         strings.Contains(strings.ToUpper(cur.Country), filter) ||
          strings.Contains(strings.ToUpper(cur.Name), filter) {
          result = append(result, cur)
       }
