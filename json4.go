@@ -23,3 +23,12 @@ func (n *name) UnmarshalJSON(data []byte) error {
    n.Last, n.First = parts[0], parts[1]
    return nil
 }
+
+type Book struct {
+	Title       string
+	PageCount   int
+	ISBN        string
+	Authors     []Name
+	Publisher   string
+	PublishDate time.Time
+}
