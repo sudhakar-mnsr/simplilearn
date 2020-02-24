@@ -12,10 +12,10 @@ type Name struct {
 	First, Last string
 }
 
-func (n *name) UnmarshalJSON(data []byte) error {
+func (n *Name) UnmarshalJSON(data []byte) error {
    var name string
    err := json.Unmarshal(data, &name)
-   if err != nil
+   if err != nil {
       fmt.Println(err)
       return err
    }
