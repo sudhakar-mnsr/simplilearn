@@ -5,11 +5,11 @@ import (
    "strings"
 )
 
-func main) {
+func main() {
    data := []string{ 
          "The yellow fish swims slowly in the water", 
-         "The brown dog barks loudly after a drink ...", 
-         "The dark bird bird of prey lands on a small ...", 
+         "The brown dog barks loudly after a drink", 
+         "The dark bird bird of prey lands on a small", 
    }
    histogram := make(map[string]int)
    done := make(chan struct{})
@@ -28,7 +28,7 @@ func main) {
    <-done
 
    for k, v := range histogram {
-      fmt.Printf("%s\t(%d)\n",k, v)
+      fmt.Printf("%s\t(%d)\n", k, v)
    }
 }     
 
