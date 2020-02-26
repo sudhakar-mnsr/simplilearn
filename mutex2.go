@@ -12,7 +12,7 @@ type Service struct {
 }
 
 func (s *Service) Start() {
-   s.StpCh := make(chan struct{})
+   s.stpCh = make(chan struct{})
    go func() {
       s.mutex.Lock()
       s.started = true
@@ -20,4 +20,19 @@ func (s *Service) Start() {
       <-s.stpCh
    }()
 }
-   
+
+func (s *Service) Stop() {
+   s.mutex.Lock()
+   defer s.mutex.Unlock()
+   if s.started {
+      s.started = false
+      close(s.stpCh)
+   }
+}
+
+func main() {
+   s := &Service{}
+   s.Start()
+   time.Sleep(time.Second)
+   s.Stop()
+}
