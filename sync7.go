@@ -33,3 +33,17 @@ func main() {
    }
 }
 
+func words(data []string) <-chan string {
+   out := make(chan string)
+   go func() {
+      defer close(out)
+      for _, line := range data {
+         words := strings.Split(line, " ")
+         for _, word := range words {
+            word = strings.ToLower(word)
+            out <- word
+         }
+      }
+   }()
+   return out
+}
