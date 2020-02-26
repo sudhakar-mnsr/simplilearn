@@ -27,3 +27,20 @@ func main() {
       fmt.Printf("%s\t(%d)\n", k, v)
    }
 } 
+
+func words(stopCh chan struct{}, data []string) <-chan string {
+   go func() {
+      for _, line := range data {
+         words := strings.Split(line, " ")
+         for _, word := range words {
+            word := strings.ToLower(word)
+            select {
+            case out <- word:
+            case <-stopCh
+               return
+            }
+         }
+      }
+   }()
+   return out
+}  
