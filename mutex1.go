@@ -24,7 +24,7 @@ func (s *Service) Stop() {
 
 func main() {
    s := &Service{}
-   s.Start
+   s.Start()
    time.Sleep(time.Second)
    s.Stop()
 }
