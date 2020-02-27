@@ -46,3 +46,9 @@ func (s *Service) Serve(id int) {
    }
 }
 
+func main() {
+   s := &Service{}
+   s.Start()
+   s.Serve(3)
+   s.Stop()
+}
