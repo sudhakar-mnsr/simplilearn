@@ -26,3 +26,23 @@ func (s *Service) Start() {
    }()
 }
 
+func (s *Service) Stop() {
+   s.mutex.Lock()
+   defer s.mutex.Unlock()
+   if s.started {
+      s.started = false
+      close(stpCh)
+   }
+}
+
+func (s *Service) Serve(id int) {
+   s.mutex.RLock()
+   msg := s.cache[id]
+   s.mutex.Unlock()
+   if msg != "" { 
+      fmt.Println(msg)
+   } else {
+      fmt.Println("Hello, goodbye!")
+   }
+}
+
