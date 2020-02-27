@@ -20,4 +20,19 @@ func (s *Service) Start() {
       <-stpCh
    }()
 }
-      
+
+func (s *Service) Stop() {
+   s.Lock()
+   defer s.Unlock()
+   if s.started {
+      s.started = false
+      close(s.stpCh)
+   }
+}
+
+func main() {
+   s := &Service{}
+   s.Start()
+   time.Sleep(time.Second)
+   s.Stop()
+}
