@@ -19,6 +19,7 @@ func main() {
             values <- i
          }
       }
+      close(values)
    }()
    
    work := func() {
