@@ -18,3 +18,16 @@ type histogram struct {
 	total int
 	freq  map[string]int
 }
+
+func (h histogram) ingest() <-chan string {
+   out := make(chan string)
+   go func() {
+      defer close(out)
+      for _, line := range data {
+         out <- line
+      }
+   }()
+   return out
+}
+
+
