@@ -30,4 +30,15 @@ func (h histogram) ingest() <-chan string {
    return out
 }
 
-
+func (h histogram) split(in <-chan string) <-chan string {
+   out := make(chan string)
+   go func() {
+      defer close(out)
+      for line := range in
+         for _, word := range strings.Split(line, " ") {
+            out <- strings.ToLower(word)
+         }
+      }
+   }()
+   return out
+}
