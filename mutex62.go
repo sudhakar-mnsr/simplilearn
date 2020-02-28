@@ -16,7 +16,7 @@ func main() {
    go func() {
       defer close(values)
       for i := 1; i < MAX; i++ {
-         if (i%3) || (i%5) {
+         if (i%3) == 0 || (i%5) == 0 {
             values <- i
          }
       } 
