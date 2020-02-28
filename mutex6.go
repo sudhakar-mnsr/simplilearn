@@ -24,3 +24,16 @@ go func() {
    close(values)
 }()
    
+work := func() {
+   defer wg.Done()
+   r := 0
+   for i := range values {
+      r += i
+   }
+   result <- r
+}
+
+wg.Add(workers)
+for i := 0; i < workers; i++ {
+   go work()
+}
