@@ -53,4 +53,13 @@ func (h histogram) count(in <-chan string) chan struct{} {
    return done
 }
 
-
+func main() {
+   h := histogram{freq: make(map[string]int)}
+   done := make(chan struct{})
+   go func() {
+      defer close(done)
+      <-h.count(h.split(h.ingest()))
+   }()
+   <-done
+   fmt.Println(h.freq)
+}  
