@@ -41,4 +41,16 @@ func (h histogram) split(in <-chan string) <-chan string {
    return out
 }
 
+func (h histogram) count(in <-chan string) chan struct{} {
+   done := make(chan struct{})
+   go func() {
+      defer close(done) 
+      for word := range in {
+         h.freq[word]++
+         h.total++
+      }
+   }()
+   return done
+}
+
 
