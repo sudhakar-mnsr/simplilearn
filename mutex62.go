@@ -23,4 +23,13 @@ go func() {
 }()
 
 
+work := func() {
+   defer wg.Done()
+   r := 0
+   for i := range values {
+      r += i
+   }
+   result <- r
+}
 
+wg.Add(workers)
