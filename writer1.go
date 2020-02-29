@@ -8,7 +8,7 @@ type channelWriter struct {
 
 func NewChannelWriter() *channelWriter {
    return &channelWriter{
-      Channel: make(chan byte, 1024)
+      Channel: make(chan byte, 1024),
    }
 }
 
