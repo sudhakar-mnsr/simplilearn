@@ -6,9 +6,9 @@ import (
    "os"
 )
 
-type alphareader string
+type alphaReader string
 
-func (a alphareader) Read(p []byte) (int, error) {
+func (a alphaReader) Read(p []byte) (int, error) {
    count := 0
    for i := 0; i < len(a); i++ {
       if (a[i] >= 'A' && a[i] <= 'Z') ||
