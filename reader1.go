@@ -4,13 +4,14 @@ import (
    "fmt"
    "io"
    "os"
+   "strings"
 )
 
 type alphaReader struct {
    src io.Reader
 }
 
-func NewReader(source io.Reader) *alphaReader {
+func NewAlphaReader(source io.Reader) *alphaReader {
    return &alphaReader{source}
 }
 
@@ -36,6 +37,6 @@ func (a *alphaReader) Read(p []byte) (int, error) {
 func main() {
    str := strings.NewReader("Hello! Where is the sun?")
    alpha := NewAlphaReader(str)
-   io.copy(os.Stdout, alpha)
+   io.Copy(os.Stdout, alpha)
    fmt.Println()
 }
