@@ -6,7 +6,7 @@ import (
    "os"
 )
 
-func main) {
+func main() {
    fin, err := os.Open("./dict.txt")
    if err != nil {
       fmt.Println(err)
