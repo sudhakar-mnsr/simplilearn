@@ -12,7 +12,7 @@ type Name struct {
    First, Last string
 }
 
-func (n *name) UnmarshalJSON(data []byte) error {
+func (n *Name) UnmarshalJSON(data []byte) error {
    var name string
    err := json.Unmarshal(data, &name)
    if err != nil {
@@ -25,16 +25,16 @@ func (n *name) UnmarshalJSON(data []byte) error {
 }
 
 type Book struct {
-Title string
-PageCount int
-ISBN string
-Authors []Name
-Publisher string
-PublishDate time.Time
+   Title string
+   PageCount int
+   ISBN string
+   Authors []Name
+   Publisher string
+   PublishDate time.Time
 }
 
 func main() {
-   file, err := open("book.dat)
+   file, err := os.Open("book.dat")
    if err != nil {
       fmt.Println(err)
       return
