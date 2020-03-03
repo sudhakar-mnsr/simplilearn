@@ -28,3 +28,27 @@ func main() {
    fmt.Println("Connected to Global Currency Service")
    var cmd, param string
 
+   for {
+      fmt.Print(prompt, "> ")
+      _, err := fmt.Scanf("%s %s", &cmd, &param)
+      if err != nil {
+         fmt.Println("Usage: GET <search string or *>")
+         continue
+      }
+      cmdLine := fmt.Sprintf("%s %s", cmd, param)
+      if n, err := conn.Write([]byte(cmdLine)); n == 0 || err != nil {
+         fmt.Println(err)
+         return
+      }
+      conn.SetReadDeadline(time.Now().Add(time.Millisecond * 5000))
+      conbuf := bufio.NewReaderSize(conn, 1024)
+      for {
+         str, err := conbuf.ReadString('\n')
+         if err != nil {
+            break
+         }
+         fmt.Print(str)
+         conn.SetReadDeadline(time.Now().Add(time.Millisecond * 700))
+      }
+   }
+}
