@@ -33,3 +33,37 @@ func main() {
    }
 }
 
+func handleConnection(conn net.Conn) {
+   defer conn.Close()
+   for {
+      cmdLine := make([]byte, (1024 * 4))
+      n, err := conn.Read(cmdLine)
+      if n == 0 || err != nil {
+         return
+      }
+
+      cmd, param := parseCommand(string(cmdLIne[0:n]))
+      if cmd == "" {
+         continue
+      }
+
+      switch strings.ToUpper(cmd) {
+         case "GET":
+            result := curr.Find(currencies, param)
+            if len(result) == 0 {
+               conn.Write([]byte("Nothing found\n"))
+               continue
+            }
+            for _, cur := range result {
+               _, err := fmt.Fprintf(conn, "%s %s %s %s\n", curr.Name, curr.Code, curr.Number, cur.Country,)
+               if err != nil {
+                  return
+               }
+               conn.SetWriteDeadline(time.Now().Add(time.Second * 5))
+            }
+            conn.SetWriteDeadline(time.Time{})
+         default:
+            conn.Write([]byte("Invalid command\n"))
+       }
+   }
+} 
