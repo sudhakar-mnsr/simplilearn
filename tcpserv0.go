@@ -6,6 +6,7 @@ import (
    "os"
    "strings"
    "time"
+
    curr "curr0"
 )
 
@@ -42,7 +43,7 @@ func handleConnection(conn net.Conn) {
          return
       }
 
-      cmd, param := parseCommand(string(cmdLIne[0:n]))
+      cmd, param := parseCommand(string(cmdLine[0:n]))
       if cmd == "" {
          continue
       }
@@ -55,7 +56,7 @@ func handleConnection(conn net.Conn) {
                continue
             }
             for _, cur := range result {
-               _, err := fmt.Fprintf(conn, "%s %s %s %s\n", curr.Name, curr.Code, curr.Number, cur.Country,)
+               _, err := fmt.Fprintf(conn, "%s %s %s %s\n", cur.Name, cur.Code, cur.Number, cur.Country,)
                if err != nil {
                   return
                }
