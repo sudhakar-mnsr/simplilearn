@@ -16,7 +16,7 @@ func main() {
       return
    }
    req.Header.Add("Accept", "text/plain")
-   req.Header.Add("User-Agent", "SampleClient/1.0)
+   req.Header.Add("User-Agent", "SampleClient/1.0")
 
    resp, err := client.Do(req)
    if err != nil {
