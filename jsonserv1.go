@@ -46,3 +46,12 @@ func gui(resp http.ResponseWriter, req *http.Request) {
    io.Copy(resp, file)
 }
 
+func main() {
+   mux := http.NewServeMux()
+   mux.HandleFunc("/", gui)
+   mux.HandleFunc("/currency", currs)
+
+   if err := http.ListenAndServe(":4040", mux); err != nil {
+      fmt.Println(err)
+   }
+}
