@@ -35,3 +35,14 @@ func currs(resp http.ResponseWriter, req *http.Request) {
       return
    }
 }
+
+func gui(resp http.ResponseWriter, req *http.Request) {
+   file, err := os.Open("./currency.html")
+   if err != nil {
+      resp.WriteHeader(http.StatusInternalServerError)
+      fmt.Println(err)
+      return
+   }
+   io.Copy(resp, file)
+}
+
