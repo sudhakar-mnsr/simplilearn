@@ -25,3 +25,17 @@ if err != nil {
    fmt.Println(err)
    return
 }
+
+client := &http.Client{}
+req, err := http.NewRequest("POST", "http://127.0.0.1:4040/currency", buf)
+if err != nil {
+   fmt.Println(err)
+   return
+}
+resp, err := client.Do(req)
+if err != nil {
+   fmt.Println(err)
+   return
+}
+defer resp.Body.Close()
+
