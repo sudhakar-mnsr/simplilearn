@@ -40,3 +40,9 @@ func checkError(err error) {
                 os.Exit(1)
         }
 }
+
+func readFully(conn net.Conn) ([]byte, error) {
+        defer conn.Close()
+
+        result := bytes.NewBuffer(nil)
+        var buf [512]byte
