@@ -24,3 +24,11 @@ func main() {
                 if err != nil {
                         continue
                 }
+
+                daytime := time.Now()
+                // Ignore return network errors.
+                mdata, _ := asn1.Marshal(daytime)
+                conn.Write(mdata)
+                conn.Close() // we're finished
+        }
+}
