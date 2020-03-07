@@ -32,3 +32,12 @@ func main() {
 
         saveJSON("person.json", person)
 }
+
+func saveJSON(fileName string, key interface{}) {
+        outFile, err := os.Create(fileName)
+        checkError(err)
+        encoder := json.NewEncoder(outFile)
+        err = encoder.Encode(key)
+        checkError(err)
+        outFile.Close()
+}
