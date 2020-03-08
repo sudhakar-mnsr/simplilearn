@@ -18,3 +18,8 @@ type Name struct {
         Family   string
         Personal string
 }
+
+type Email struct {
+        Kind    string
+        Address string
+}
