@@ -8,3 +8,13 @@ import (
         "fmt"
         "os"
 )
+
+type Person struct {
+        Name  Name
+        Email []Email
+}
+
+type Name struct {
+        Family   string
+        Personal string
+}
