@@ -48,8 +48,9 @@ func loadJSON(fileName string, key interface{}) {
         inFile.Close()
 }
 
-func checkerror(err error) {
+func checkError(err error) {
         if err != nil {
                 fmt.Println("Fatal error ", err.Error())
+                os.Exit(1)                                                                      
         }
 }
