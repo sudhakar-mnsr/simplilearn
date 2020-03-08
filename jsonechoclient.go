@@ -44,3 +44,10 @@ func main() {
                 fmt.Println("Usage: ", os.Args[0], "host:port")
                 os.Exit(1)
         }
+        service := os.Args[1]
+
+        conn, err := net.Dial("tcp", service)
+        checkError(err)
+
+        encoder := json.NewEncoder(conn)
+        decoder := json.NewDecoder(conn)
