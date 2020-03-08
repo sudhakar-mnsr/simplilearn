@@ -31,3 +31,10 @@ func (p Person) String() string {
         }
         return s
 }
+
+func main() {
+        var person Person
+        loadJSON("person.json", &person)
+
+        fmt.Println("Person", person.String())
+}
