@@ -33,3 +33,14 @@ func (p Person) String() string {
         }
         return s
 }
+
+func main() {
+        person := Person{
+                Name: Name{Family: "Newmarch", Personal: "Jan"},
+                Email: []Email{Email{Kind: "home", Address: "jan@newmarch.name"},
+                        Email{Kind: "work", Address: "j.newmarch@boxhill.edu.au"}}}
+
+        if len(os.Args) != 2 {
+                fmt.Println("Usage: ", os.Args[0], "host:port")
+                os.Exit(1)
+        }
