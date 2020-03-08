@@ -51,3 +51,12 @@ func main() {
 
         encoder := json.NewEncoder(conn)
         decoder := json.NewDecoder(conn)
+        for n := 0; n < 10; n++ {
+                encoder.Encode(person)
+                var newPerson Person
+                decoder.Decode(&newPerson)
+                fmt.Println(newPerson.String())
+        }
+
+        os.Exit(0)
+}
